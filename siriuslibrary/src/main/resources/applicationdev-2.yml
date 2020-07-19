@@ -1,0 +1,34 @@
+# SpringBoot核心配置文件
+spring:
+  # 配置thymeleaf
+  thymeleaf:
+    cache: false                  # 设置取消缓存，便于debug随时更新代码
+    prefix: classpath:/templates/ # 设置html资源文件地址（默认）
+    suffix: .html                 # 设置html后缀（默认）
+  # 配置redis
+  redis:
+    host: localhost
+    port: 6379
+    database: 1
+  # 配置druid连接池，配置MySQL，其他配置项请参考https://github.com/alibaba/druid/tree/master/druid-spring-boot-starter
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/library_test?serverTimezone=UTC
+      username: root
+      password: 密码
+
+server:
+  port: 8080          # 访问端口
+  # 配置服务器
+  servlet:
+    context-path: /   # 上下文根目录
+    # 字符编码过滤器
+    encoding:
+      enabled: true
+      charset: UTF-8  # 设置request请求字符集重新解析为utf-8
+      force: true     # 强制转换
+
+mybatis:
+  # 配置mybatis的mapper文件位置
+  mapper-locations: classpath:mapper/*.xml

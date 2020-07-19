@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sirius.dao.mysql.UserInfoDao">
+<!--select-->
+    <sql id="all">
+        id, name, sex, tel, vip, email, address
+    </sql>
+    <select id="selectUserInfoById" resultType="com.sirius.domain.UserInfo">
+        select <include refid="all"/> from tb_userinfo where name = #{name};
+    </select>
+    <select id="selectUserInfoByName" resultType="com.sirius.domain.UserInfo">
+        select <include refid="all"/> from tb_userinfo where name = #{name};
+    </select>
+    <select id="selectUserInfoByVIP" resultType="com.sirius.domain.UserInfo">
+        select <include refid="all"/> from tb_userinfo where vip = #{vip};
+    </select>
+    <select id="selectUserInfoBySex" resultType="com.sirius.domain.UserInfo">
+        select <include refid="all"/> from tb_userinfo where sex = #{sex};
+    </select>
+    <select id="selectUserInfo" resultType="com.sirius.domain.UserInfo">
+        select <include refid="all"/> from tb_userinfo where name = #{name} and sex = #{sex} and tel = #{tel} and
+                                       vip = #{vip} and email = #{email} and address = #{address};
+    </select>
+    <select id="selectUserInfoByTel" resultType="com.sirius.domain.UserInfo">
+        select  <include refid="all"/> from tb_userinfo where tel = #{tel};
+    </select>
+    <select id="selectCount" resultType="java.lang.Integer">
+        select count(*) from tb_userinfo;
+    </select>
+    <select id="selectCountByCondition" resultType="java.lang.Integer">
+        select count(*) from tb_userinfo where
+        <if test="id != null">
+            id = #{id} and
+        </if>
+        <if test="name != null">
+            name = #{name} and
+        </if>
+        <if test="sex != null">
+            sex = #{sex} and
+        </if>
+        <if test="tel != null">
+            tel = #{tel} and
+        </if>
+        <if test="vip != null">
+            vip = #{vip} and
+        </if>
+       <if test="email != null">
+           email = #{email} and
+       </if>
+       <if test="address != null">
+           address = #{address} and
+       </if>
+        1 = 1;
+    </select>
+    <select id="selectByCondition" resultType="com.sirius.domain.UserInfo">
+        select <include refid="all"/> from tb_userinfo where
+        <if test="id != null">
+            id = #{id} and
+        </if>
+        <if test="name != null">
+            name = #{name} and
+        </if>
+        <if test="sex != null">
+            sex = #{sex} and
+        </if>
+        <if test="tel != null">
+            tel = #{tel} and
+        </if>
+        <if test="vip != null">
+            vip = #{vip} and
+        </if>
+        <if test="email != null">
+            email = #{email} and
+        </if>
+        <if test="address != null">
+            address = #{address} and
+        </if>
+        1 = 1;
+    </select>
+    <select id="selectVIPById" resultType="java.lang.String">
+        select vip from tb_userinfo where id = #{id};
+    </select>
+<!--update-->
+    <update id="updateUserInfo">
+        update tb_userinfo set name = #{newUserInfo.name}, sex = #{newUserInfo.name}, tel = #{newUserInfo.tel},
+                               vip = #{newUserInfo.vip}, email = #{newUserInfo.email}, address = #{newUserInfo.address}
+                        where name = #{oldUserInfo.name} and sex = #{oldUserInfo.name} and tel = #{oldUserInfo.tel} and
+                              vip = #{oldUserInfo.vip} and email = #{oldUserInfo.email} and address = #{oldUserInfo.address};
+
+    </update>
+    <update id="updateUserInfoById">
+        update tb_userinfo set  name = #{newUserInfo.name}, sex = #{newUserInfo.name}, tel = #{newUserInfo.tel},
+                                vip = #{newUserInfo.vip}, email = #{newUserInfo.email}, address = #{newUserInfo.address}
+                        where id = #{id};
+    </update>
+<!--delete-->
+    <delete id="deleteUserInfoById">
+        delete from tb_userinfo where id = #{id};
+    </delete>
+    <delete id="deleteUserInfo">
+        delete from tb_userinfo where name = #{name} and sex = #{sex} and tel = #{tel} and
+                                      vip = #{vip} and email = #{email} and address = #{address};
+    </delete>
+    <delete id="deleteUserInfoByCondition">
+        delete from tb_userinfo where
+        <if test="id != null">
+            id = #{id} and
+        </if>
+        <if test="name != null">
+            name = #{name} and
+        </if>
+        <if test="sex != null">
+            sex = #{sex} and
+        </if>
+        <if test="tel != null">
+            tel = #{tel} and
+        </if>
+        <if test="vip != null">
+            vip = #{vip} and
+        </if>
+        <if test="email != null">
+            email = #{email} and
+        </if>
+        <if test="address != null">
+            address = #{address} and
+        </if>
+        <if test="id == null and name == null and sex == null and tex == null and vip == null and email == null
+                    and address == null">
+            1 = 2
+        </if>
+        ;
+    </delete>
+<!--insert-->
+    <insert id="insertUserInfo">
+        insert into tb_userinfo(id, name, sex, tel, vip, email, address) values (#{id}, #{name}, #{sex}, #{tal}, #{vip}, #{email}, #{address})
+    </insert>
+</mapper>

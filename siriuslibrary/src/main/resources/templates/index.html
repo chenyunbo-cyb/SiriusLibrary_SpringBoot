@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ZH-cn" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理员登录</title>
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+</head>
+<body>
+    <div class="login">
+        <div class="login-1">
+            <form th:action="@{/login}" method="POST">
+                <label for="username">用户名：</label>
+                <select name="type">
+                    <option value="reader">读者</option>
+                    <option value="admin">管理员</option>
+                    <option value="s-admin">超级管理员</option>
+                </select>
+                <input type="text" name="username" id="username"><br>
+                <label for="password">密码：</label>
+                <input type="password" name="password" id="password"><br>
+                <input type="submit" value="登录">
+            </form>
+
+        </div>
+
+    </div>
+    <div th:text="|当前时间${time}, 您是第${total}位访客|"></div>
+</body>
+</html>

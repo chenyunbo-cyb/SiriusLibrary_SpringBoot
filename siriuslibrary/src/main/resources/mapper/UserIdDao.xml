@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sirius.dao.mysql.UserIdDao">
+<!--select-->
+    <select id="selectOne" resultType="com.sirius.domain.UserId">
+        select id, flag from tb_userid where flag = 0 limit 1;
+    </select>
+    <select id="selectAllByStatus" resultType="com.sirius.domain.UserId">
+        select id, flag from tb_userid where flag = #{status};
+    </select>
+    <select id="selectStatusById" resultType="java.lang.Integer">
+        select flag from tb_userid where id = #{id};
+    </select>
+    <select id="selectMaxId" resultType="java.lang.Integer">
+        select max(id) from tb_userid;
+    </select>
+    <select id="selectMaxIdByStatus" resultType="java.lang.Integer">
+        select max(id) from tb_userid where flag = #{flag};
+    </select>
+    <select id="selectAllNotFree" resultType="java.lang.Integer">
+        select id from tb_userid where flag != 0;
+    </select>
+<!--insert-->
+    <insert id="insertOne">
+        insert into tb_userid(id, flag) values (#{id}, #{flag});
+    </insert>
+    <insert id="insertById">
+        insert into tb_userid(id, flag) VALUES (#{id}, #{flag});
+    </insert>
+<!--update-->
+    <update id="updateStatus">
+        update tb_userid set flag = #{flag} where id = #{id};
+    </update>
+</mapper>

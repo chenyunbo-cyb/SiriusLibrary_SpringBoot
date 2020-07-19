@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sirius.dao.mysql.UserLoginDao">
+    <select id="selectUserLoginByUserName" resultType="com.sirius.domain.UserLogin">
+        select id, username, password, salt, lasttime from tb_userlogin where username = #{username};
+    </select>
+    <select id="selectUserLoginByTimeSection" resultType="com.sirius.domain.UserLogin">
+        select id, username, password, salt, lasttime from tb_userlogin where lasttime
+        <if test="left &lt; right and left &gt; 0 and right &gt; 0">
+            between #{left} and #{right}
+        </if>
+        <if test="left == 0 and right &gt; 0">
+            &lt; #{right}
+        </if>
+        <if test="right == 0 and left &gt; 0">
+            &gt; #{left}
+        </if>
+        ;
+    </select>
+    <select id="selectUserLoginById" resultType="com.sirius.domain.UserLogin">
+        select id, username, password, salt, lasttime from tb_userlogin where id = #{id};
+    </select>
+    <select id="selectUserNameById" resultType="java.lang.String">
+        select username from tb_userlogin where id=#{id};
+    </select>
+<!--update-->
+    <update id="updatePasswordByName">
+        update tb_userlogin set password = #{password}, salt = #{salt} where username = #{username};
+    </update>
+    <update id="updateUserLogin">
+        update tb_userlogin set username = #{username}, password = #{password}, salt = #{salt}, lasttime = {lasttime};
+    </update>
+    <update id="updateLastTimeByName">
+        update tb_userlogin set lasttime = #{date} where username = #{name};
+    </update>
+    <update id="updateLastTimeByUserLogin">
+        update tb_userlogin set lasttime = #{date} where id = #{id} and username = #{username} and password = #{password} and
+                                                         salt = #{salt} and lasttime = #{lasttime};
+    </update>
+    <update id="updatePasswordById">
+        update tb_userlogin set password = #{password}, salt = #{salt} where id = #{id};
+    </update>
+    <update id="updatePasswordByUserLogin">
+        update tb_userlogin set password = #{password}, salt = #{salt} where id = #{id} and username = #{username};
+    </update>
+    <update id="updateVip">
+        update tb_userinfo set vip = #{vip} where id = #{id};
+    </update>
+<!--insert-->
+    <insert id="insertUserLogin">
+        insert into tb_userlogin(id, username, password, salt, lasttime) VALUES (#{id}, #{username}, #{password}, #{salt}, #{lasttime});
+    </insert>
+</mapper>

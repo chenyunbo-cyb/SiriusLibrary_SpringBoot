@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sirius.dao.mysql.BookDao">
+    <sql id="selectAll">
+        select id, name, author, outtime, type, isbn, picture, total, remain, ordered
+    </sql>
+    <sql id="insertAll">
+        insert into books(name, author, outtime, type, isbn, picture, total, remain, ordered)
+    </sql>
+    <sql id="updateWhereAll">
+        where name = #{name} and author = #{author} and outtime = #{outtime} and
+            type = #{type} and isbn = #{isbn} and picture = #{picture} and
+            total = #{total} and remain = #{remain} and ordered = #{ordered}
+    </sql>
+    <select id="selectBookByName" resultType="com.sirius.domain.Book">
+        <include refid="selectAll"/> from books where name = #{name};
+    </select>
+    <select id="selectBookByNameAndAuthor" resultType="com.sirius.domain.Book">
+        <include refid="selectAll"/> from books where name = #{name} and author = #{author};
+    </select>
+    <select id="selectBook" resultType="com.sirius.domain.Book">
+        <include refid="selectAll"/> from books where name = #{name} and author = #{author}
+                                                and outtime = #{outtime} and type = #{type}
+                                                and isbn = #{isbn} and picture = #{picture};
+    </select>
+    <select id="selectBookByISBN" resultType="com.sirius.domain.Book">
+        <include refid="selectAll"/> from books where isbn = #{isbn};
+    </select>
+    <select id="selectBookByType" resultType="com.sirius.domain.Book">
+        <include refid="selectAll"/> from books where type = #{type};
+    </select>
+    <select id="selectBookByAuthor" resultType="com.sirius.domain.Book">
+        <include refid="selectAll"/> from books where author = #{author};
+    </select>
+    <select id="selectBookRemainZero" resultType="com.sirius.domain.Book">
+        <include refid="selectAll"/> from books where remain = 0;
+    </select>
+    <select id="selectBookRemain" resultType="com.sirius.domain.Book">
+        <include refid="selectAll"/> from books where remain != 0;
+    </select>
+    <select id="selectBookByPublishTimeSection" resultType="com.sirius.domain.Book">
+        <include refid="selectAll"/> from books where outtime
+            <if test="left &lt; right and left &gt; 0 and fight &gt; 0">
+                between #{left} and #{right}
+            </if>
+            <if test="left == null and right != null">
+                &lt; #{right} and outtime &gt; 0
+            </if>
+            <if test="left != null and right == 0">
+                &gt; #{left}
+            </if>
+            ;
+    </select>
+    <select id="selectBookByOtherCondition" resultType="com.sirius.domain.Book">
+        <include refid="selectAll"/> from books where
+        <if test="id != null">
+            id = #{id} and
+        </if>
+        <if test="name != null">
+            name = #{name} and
+        </if>
+        <if test="author != null">
+            author = #{author} and
+        </if>
+        <if test="outtime != null">
+            outtime = #{outtime} and
+        </if>
+         <if test="type != null">
+             type = #{type} and
+         </if>
+         <if test="isbn != null">
+             isbn = #{isbn} and
+         </if>
+         <if test="total != null">
+             total = #{total} and
+         </if>
+         <if test="remain != null">
+             remain = #{remain} and
+         </if>
+         <if test="ordered != null">
+             ordered = #{ordered} and
+         </if>
+          1 = 1;
+    </select>
+<!--insert-->
+    <insert id="insertBook">
+        <include refid="insertAll"/> values(#{name}, #{author}, #{outtime}, #{type}, #{isbn}, #{picture}, #{total}, #{remain}, #{ordered});
+    </insert>
+<!--update-->
+    <update id="updateBookByISBN">
+        update books set isbn = #{newIsbn} where isbn = #{oldIsbn};
+    </update>
+    <update id="updateBookById">
+        update books set id = #{newId} where id = #{oldId};
+    </update>
+    <update id="updateBook">
+        update books set name = #{newBook.name}, author = #{newBook.author}, outtime = #{newBook.outtime},
+                         type = #{newBook.type}, isbn = #{newBook.isbn}, picture = #{newBook.picture},
+                         total = #{newBook.total}, remain = #{newBook.remain}, ordered = #{newBook.ordered}
+                    where name = #{oldBook.name} and author = #{oldBook.author} and outtime = #{oldBook.outtime} and
+                          type = #{oldBook.type} and isbn = #{oldBook.isbn} and picture = #{oldBook.picture} and
+                          total = #{oldBook.total} and remain = #{oldBook.remain} and ordered = #{oldBook.ordered};
+    </update>
+    <update id="updateRemain">
+        update books set remain = #{newRemain} <include refid="updateWhereAll"/>;
+    </update>
+    <update id="updateOrdered">
+        update books set ordered = #{newOrdered} <include refid="updateWhereAll"/>;
+    </update>
+    <update id="updateTotal">
+        update books set total = #{newTotal} <include refid="updateWhereAll"/>;
+    </update>
+<!--删除-->
+    <delete id="deleteByISBN">
+        delete from books where isbn = #{isbn};
+    </delete>
+    <delete id="deleteById">
+        delete from books where id = #{id};
+    </delete>
+    <delete id="deleteBook">
+        delete from books where name = #{name} and name = #{name} and author = #{author} and outtime = #{outtime} and
+                                type = #{type} and isbn = #{isbn} and picture = #{picture} and
+                                total = #{total} and remain = #{remain} and ordered = #{ordered};
+    </delete>
+    <delete id="deleteBookByAuthor">
+        delete from books where author = #{author};
+    </delete>
+    <delete id="deleteBookByPublishTimeSection">
+        delete from books where outtime
+        <if test="left &gt; 0 and right &gt; 0 and left &lt; right">
+            between #{left} and #{right}
+        </if>
+        <if test="left == 0 and right &gt; 0">
+            &gt; 0 and outtime &lt; #{right}
+        </if>
+        <if test="right == 0 and left &gt; 0">
+            &gt; #{right}
+        </if>
+        ;
+    </delete>
+    <delete id="deleteBookByName">
+        delete from books where name = #{name};
+    </delete>
+    <delete id="deleteBookByType">
+        delete from books where type = #{type};
+    </delete>
+    <delete id="deleteBookByNameAndAuthor">
+        delete from books where name = #{name} and author = #{author};
+    </delete>
+    <delete id="deleteBookByOtherCondition">
+        delete from books where
+        <if test="id != null">
+            id = #{id} and
+        </if>
+        <if test="name != null">
+            name = #{name} and
+        </if>
+        <if test="author != null">
+            author = #{author} and
+        </if>
+        <if test="outtime != null">
+            outtime = #{outtime} and
+        </if>
+        <if test="type != null">
+            type = #{type} and
+        </if>
+        <if test="isbn != null">
+            isbn = #{isbn} and
+        </if>
+        <if test="total != null">
+            total = #{total} and
+        </if>
+        <if test="remain != null">
+            remain = #{remain} and
+        </if>
+        <if test="ordered != null">
+            ordered = #{ordered} and
+        </if>
+        <if test="id == null and name == null and author == null and outtime == null and type == null and isbn == null
+            and total == null and remain == null and ordered == null">
+            1 = 2
+        </if>
+        ;
+    </delete>
+</mapper>
