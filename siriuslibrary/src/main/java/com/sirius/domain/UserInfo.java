@@ -15,6 +15,7 @@ public class UserInfo {
     private String email;
     private String address;
 
+    public UserInfo(){}
     public UserInfo(Integer id, String name, String sex, String tel, String vip, String email, String address) {
         this.id = id;
         this.name = name;

@@ -19,6 +19,7 @@ public class PublicPageImpl implements PublicPageService {
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
+    // 获取访问数量
     @Override
     public String enterNum() {
         String get = stringRedisTemplate.opsForValue().get("total_in");  // 获取total_in的值

@@ -11,9 +11,11 @@ import com.sirius.domain.UserId;
 import com.sirius.domain.UserInfo;
 import com.sirius.service.interfaces.UserIdService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
+@Service
 public class UserIdServiceImpl implements UserIdService {
     // 注入id操作数据库接口
     @Autowired

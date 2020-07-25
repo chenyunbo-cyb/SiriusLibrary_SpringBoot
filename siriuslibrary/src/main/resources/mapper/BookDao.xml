@@ -9,11 +9,6 @@
     <sql id="insertAll">
         insert into books(name, author, outtime, type, isbn, picture, total, remain, ordered)
     </sql>
-    <sql id="updateWhereAll">
-        where name = #{name} and author = #{author} and outtime = #{outtime} and
-            type = #{type} and isbn = #{isbn} and picture = #{picture} and
-            total = #{total} and remain = #{remain} and ordered = #{ordered}
-    </sql>
     <select id="selectBookByName" resultType="com.sirius.domain.Book">
         <include refid="selectAll"/> from books where name = #{name};
     </select>
@@ -84,6 +79,9 @@
          </if>
           1 = 1;
     </select>
+    <select id="selectAllBook" resultType="com.sirius.domain.Book">
+        select id, name, author, outtime, type, isbn, picture, total, remain, ordered from books;
+    </select>
 <!--insert-->
     <insert id="insertBook">
         <include refid="insertAll"/> values(#{name}, #{author}, #{outtime}, #{type}, #{isbn}, #{picture}, #{total}, #{remain}, #{ordered});
@@ -104,13 +102,23 @@
                           total = #{oldBook.total} and remain = #{oldBook.remain} and ordered = #{oldBook.ordered};
     </update>
     <update id="updateRemain">
-        update books set remain = #{newRemain} <include refid="updateWhereAll"/>;
+        update books set
+        <if test="target == add">
+            remain = remain + #{newRemain}
+        </if>
+        <if test="target == reduce">
+            remain = remain - #{newRemain}
+        </if>
+        <if test="target == update">
+            remain = #{newRemain}
+        </if>
+            where name = #{book.name} and isbn = #{book.isbn};
     </update>
     <update id="updateOrdered">
-        update books set ordered = #{newOrdered} <include refid="updateWhereAll"/>;
+        update books set ordered = #{newOrdered} where name = #{book.name} and isbn = #{book.isbn};
     </update>
     <update id="updateTotal">
-        update books set total = #{newTotal} <include refid="updateWhereAll"/>;
+        update books set total = #{newTotal} where name = #{book.name} and isbn = #{book.isbn};
     </update>
 <!--删除-->
     <delete id="deleteByISBN">

@@ -27,4 +27,9 @@ public class PublicPage {
         mv.setViewName("index");
         return mv;
     }
+    @RequestMapping("/resister")
+    public ModelAndView resisterPage(ModelAndView mv){
+        mv.setViewName("resister");
+        return mv;
+    }
 }

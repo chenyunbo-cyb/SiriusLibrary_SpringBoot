@@ -8,6 +8,8 @@ import java.util.Date;
 
 public interface BookDao {
     /*查询*/
+    // 查询所有书籍
+    ArrayList<Book> selectAllBook();
     // 根据书名查询
     ArrayList<Book> selectBookByName(String name);
     // 根据书名和作者查询
@@ -34,11 +36,11 @@ public interface BookDao {
     // 根据ISBN修改
     int updateBookByISBN(@Param("oldIsbn") String oldIsbn, @Param("newIsbn") String newIsbn);
     // 根据id修改
-    int updateBookById(@Param("oldId") Integer oldId, @Param("newId") String newId);
+    int updateBookById(@Param("oldId") Integer oldId, @Param("newId") Integer newId);
     // 根据对象修改
     int updateBook(@Param("oldBook") Book oldBook, @Param("newBook") Book newBook);
     // 修改余量
-    int updateRemain(@Param("book") Book book, @Param("newRemain") Integer newRemain);
+    int updateRemain(@Param("book") Book book, @Param("newRemain") Integer newRemain, @Param("target") String target);
     // 修改预定量
     int updateOrdered(@Param("book") Book book, @Param("newOrdered") Integer newOrdered);
     // 修改总量

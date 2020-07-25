@@ -28,10 +28,11 @@ org.mybatis.generator：<br>
 &emsp;&emsp;&emsp;&emsp;| administrator：管理员端控制器<br>
 &emsp;&emsp;&emsp;&emsp;| main：公共页面控制器<br>
 &emsp;&emsp;| dao：数据库永久dao接口层<br>
-&emsp;&emsp;&emsp;&emsp;| mysql：mysql端数据库接口
-&emsp;&emsp;&emsp;&emsp;| redis：redis端数据库接口
-&emsp;&emsp;&emsp;&emsp;| mongo：MongoDB端数据库接口
+&emsp;&emsp;&emsp;&emsp;| mysql：mysql端数据库接口<br>
+&emsp;&emsp;&emsp;&emsp;| redis：redis端数据库接口<br>
+&emsp;&emsp;&emsp;&emsp;| mongo：MongoDB端数据库接口<br>
 &emsp;&emsp;| domain：实体类层<br>
+&emsp;&emsp;| enums：枚举类<br>
 &emsp;&emsp;| filter：过滤器层<br>
 &emsp;&emsp;&emsp;&emsp;| conf：过滤器层配置类<br>
 &emsp;&emsp;| service：服务层<br>
@@ -57,7 +58,21 @@ org.mybatis.generator：<br>
 &emsp;&emsp;Redis 3.2.100<br>
 &emsp;&emsp;Mongodb 4.2.8<br>
 &emsp;&emsp;Tomcat（SpringBoot内嵌）；外部（用于war包部署）：9.0.36<br>
-&emsp;&emsp;IDEA 2020.1.3
+&emsp;&emsp;IDEA 2020.1.4
+# IDEA授权信息：
+IntelliJ IDEA 2020.1.4 (Ultimate Edition)<br>
+Build #IU-201.8743.12, built on July 21, 2020<br>
+Licensed to yideng qian<br>
+Subscription is active until June 21, 2021<br>
+For educational use only.<br>
+Runtime version: 11.0.7+10-b765.65 amd64<br>
+VM: OpenJDK 64-Bit Server VM by JetBrains s.r.o.<br>
+Windows 10 10.0<br>
+GC: ParNew, ConcurrentMarkSweep<br>
+Memory: 1971M<br>
+Cores: 8<br>
+Registry: ide.suppress.double.click.handler=true<br>
+Non-Bundled Plugins: String Manipulation, com.bruce.intellijplugin.RedisPlugin, GrepConsole, Lombook Plugin, SequenceDiagram, com.godwin.json.parser, net.vektah.codeglance, one.util.ideaplugin.screenshoter, org.jetbrains.kotlin, izhangzhihao.rainbow.brackets, org.intellij.scala, hdzi.idea-editstarters-plugin, cn.yiiguxing.plugin.translate<br>
 # 二、技术点
 + SpringBoot框架：集成MyBatis、日志功能（控制台、文件）、发送邮件验证码功能、Thymeleaf模板框架、Redis数据库操作、MongoDB操作；过滤器、拦截器
 + 数据库：MySQL（druid连接池）、Redis、MongoDB（暂不实现）
@@ -83,15 +98,15 @@ org.mybatis.generator：<br>
 + 管理员端全部功能
 
 # 四、版本信息
-## 2020.07.19
+## 2020.07.25
 + 完成了项目的初始化架构，编辑README
 + 完成了dao层接口、mapper文件创建
 + 完成了数据库表的实体类的创建
-+ 添加了登录页面
++ 添加了登录页面、注册页面（简易用于测试接口）、id显示界面（简易用于测试）
 + 添加了密码hash算法工具类
 + 完成了部分主页业务层（测试完毕）
-+ 密码业务层、用户id业务层，包括接口和实现类（未完成测试）
-
++ 密码业务层、用户id业务层，部分书籍业务层，包括接口和实现类（未完成测试）
++ 完成注册控制器
 # 五、拿到项目后需要做的事情
 + 1、将根目录下的sql文件运行至数据库。
 + 2、在idea内安装lombok插件，不安装的话log会飘红，但代码执行正常，强迫症福利。

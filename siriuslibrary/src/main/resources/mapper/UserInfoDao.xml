@@ -134,6 +134,6 @@
     </delete>
 <!--insert-->
     <insert id="insertUserInfo">
-        insert into tb_userinfo(id, name, sex, tel, vip, email, address) values (#{id}, #{name}, #{sex}, #{tal}, #{vip}, #{email}, #{address})
+        insert into tb_userinfo(id, name, sex, tel, vip, email, address) values (#{id}, #{name}, #{sex}, #{tel}, #{vip}, #{email}, #{address});
     </insert>
 </mapper>
