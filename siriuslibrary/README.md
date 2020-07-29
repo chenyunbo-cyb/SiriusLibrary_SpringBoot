@@ -59,20 +59,7 @@ org.mybatis.generator：<br>
 &emsp;&emsp;Mongodb 4.2.8<br>
 &emsp;&emsp;Tomcat（SpringBoot内嵌）；外部（用于war包部署）：9.0.36<br>
 &emsp;&emsp;IDEA 2020.1.4
-# IDEA授权信息：
-IntelliJ IDEA 2020.1.4 (Ultimate Edition)<br>
-Build #IU-201.8743.12, built on July 21, 2020<br>
-Licensed to yideng qian<br>
-Subscription is active until June 21, 2021<br>
-For educational use only.<br>
-Runtime version: 11.0.7+10-b765.65 amd64<br>
-VM: OpenJDK 64-Bit Server VM by JetBrains s.r.o.<br>
-Windows 10 10.0<br>
-GC: ParNew, ConcurrentMarkSweep<br>
-Memory: 1971M<br>
-Cores: 8<br>
-Registry: ide.suppress.double.click.handler=true<br>
-Non-Bundled Plugins: String Manipulation, com.bruce.intellijplugin.RedisPlugin, GrepConsole, Lombook Plugin, SequenceDiagram, com.godwin.json.parser, net.vektah.codeglance, one.util.ideaplugin.screenshoter, org.jetbrains.kotlin, izhangzhihao.rainbow.brackets, org.intellij.scala, hdzi.idea-editstarters-plugin, cn.yiiguxing.plugin.translate<br>
+
 # 二、技术点
 + SpringBoot框架：集成MyBatis、日志功能（控制台、文件）、发送邮件验证码功能、Thymeleaf模板框架、Redis数据库操作、MongoDB操作；过滤器、拦截器
 + 数据库：MySQL（druid连接池）、Redis、MongoDB（暂不实现）
